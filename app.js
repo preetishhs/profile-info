@@ -19,7 +19,7 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/profile', function(req, res, next) {
-	unirest('localhost:80')
+	unirest.get('localhost:80')
 	.end(function (response) {
 		res.type('json');
 		res.status(200).send(response.body);
