@@ -21,8 +21,12 @@ app.get('/', function(req, res, next) {
 app.get('/profile', function(req, res, next) {
 	unirest.get('localhost:80')
 	.end(function (response) {
-		res.type('json');
-		res.status(200).send(response.body);
+		if(response.body) {
+			res.type('json');
+			res.status(200).send(response.body);
+		} else {
+			res.status(404).send('Profile not found');
+		}
 	});
 });
 
