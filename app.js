@@ -5,7 +5,7 @@ var unirest = require('unirest');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var app = express();
-var port = process.env.PORT || 8080,
+var port = process.env.PORT || 5000,
 	ip   = process.env.IP || '127.0.0.1';
 	
 
@@ -19,11 +19,11 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/profile', function(req, res, next) {
-	unirest.get('localhost:80')
+	unirest.get(process.env.profile_url)
 	.end(function (response) {
-		if(response.body) {
+		if(response) {
 			res.type('json');
-			res.status(200).send(response.body);
+			res.status(200).send(response);
 		} else {
 			res.status(404).send('Profile not found');
 		}

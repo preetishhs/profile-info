@@ -1,0 +1,15 @@
+version: "3"
+services:
+  sample-app:
+    image: preetishhs/docker-sample
+    ports:
+      - 80:80
+  profile-app:
+    image: preetishhs/profile-info
+    ports:
+      - 5000:5000
+    links:
+      - sample-app
+    environment:
+      profile_url: http://sample-app:80/data
+
